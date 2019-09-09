@@ -1,0 +1,25 @@
+<% include partials/header%>
+
+<h2>List of Videos</h2>
+
+<div class="jumbotron">
+    <h1 class="display-4 text-danger">Hello, world!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  </div>
+
+
+ <%videos.forEach((video) => {%>
+   <div>
+      <p><h3>Title: <%=video.title%></h3></p>
+      
+      <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/<%=video.url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      
+   </%=video.title%>
+ <%})%>
+
+
+
+<% include partials/footer%>
