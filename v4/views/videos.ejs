@@ -1,0 +1,10 @@
+<h2>List of Videos</h2>
+
+ <%videos.forEach((video) => {%>
+   <div>
+      <p><h3>Title: <%=video.title%></h3></p>
+      
+      <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/_p9JfgbaqTw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      
+   </%=video.title%>
+ <%})%>

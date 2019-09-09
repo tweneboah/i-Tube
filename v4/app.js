@@ -29,7 +29,7 @@
   //===========
 
   //Get the form
-  app.get('/videos', (req,res) => {
+  app.get('/videos/add', (req,res) => {
     res.render('addVideo');
   })
 
@@ -48,6 +48,17 @@
     })
   })
 
+
+  //FETCH VIDEOS
+  app.get('/videos', (req, res) => {
+    Video.find({}, (err, videos) => {
+      if(err){
+        console.log(err)
+      }else{
+        res.render('videos', {videos: videos})
+      }
+    })
+  })
   //SEVER
   let PORT =  process.env.PORT || 5000
   app.listen(PORT, () => {
