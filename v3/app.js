@@ -22,6 +22,14 @@ app.get('/', (req, res) => {
  res.render('home')
 })
 
+//===========
+//ADDING A YOUTUBE VIDEO LINK
+//===========
+
+//Get the form
+app.get('/videos', (req,res) => {
+   res.render('addVideo');
+})
 
 //SEVER
 let PORT =  process.env.PORT || 5000
