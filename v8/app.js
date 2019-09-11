@@ -40,7 +40,6 @@
   passport.deserializeUser(User.deserializeUser())
 
 
-
   //ROUTES
   app.get('/', (req, res) => {
   res.render('home')
@@ -89,6 +88,7 @@
 
 //LOGOUT
 app.get('/logout', (req, res) => {
+  req.logOut();
   res.redirect('/')
 })
 
@@ -104,7 +104,7 @@ app.get('/logout', (req, res) => {
 
   //Add Vido Logic
   app.post('/videos', (req, res) => {
-     
+    
     //Get values from the form 
     let title = req.body.title;
     let url = req.body.url;
@@ -124,7 +124,8 @@ app.get('/logout', (req, res) => {
 
 
   //FETCH VIDEOS
-  app.get('/videos', (req, res) => {
+  app.get('/videos',(req, res) => {
+    console.log('Login User', req.user)
     Video.find({}, (err, videos) => {
       if(err){
         console.log(err)
@@ -133,6 +134,8 @@ app.get('/logout', (req, res) => {
       }
     })
   });
+
+
 
 
   //SEVER
