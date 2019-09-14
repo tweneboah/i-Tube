@@ -35,8 +35,7 @@ body{
 
 .login-form
 {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+   padding:1.5em auto;
 }
 
 .login-form .row
