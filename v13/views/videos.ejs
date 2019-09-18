@@ -1,0 +1,20 @@
+<% include partials/header%>
+
+<div class="container-fluid">
+  <div class="row">
+     <%videos.forEach((video) => {%>
+      <div class="col-lg-4">
+          <div class="card m-1">
+             <div class="card-body">
+                  <p><h5><%=video.title%></h5></p>
+                <iframe width="1000" height="900" class="img-thumbnail" src="https://www.youtube-nocookie.com/embed/<%=video.url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+
+                <a href="/videos/<%=video._id%>">Details</a>
+              </div>
+       </div>
+    </div>
+  <%})%>
+  </div>
+</div>
+
+<% include partials/footer%>
