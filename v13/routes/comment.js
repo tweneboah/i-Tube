@@ -2,46 +2,52 @@ const express = require('express');
 const router = express.Router();
 const Video = require('../models/video');
 const User = require('../models/User');
+const Comment = require('../models/Comment');
 const middleware = require('../middleware/index')
-//===========
-//ADDING A YOUTUBE VIDEO LINK
-//===========
 
-//Get the form
-router.get('/videos/add', middleware.isLogin, (req,res) => {
-  res.render('addVideo');
-})
+//Get the comment form form
 
-
-router.post('/videos', (req, res) => {
-  //Get values from the form 
-  let title = req.body.title;
-  let url = req.body.url;
-  let paresedURL = new URL(req.body.url);
-  let extractingCodeFromYoutubeUrl = paresedURL.searchParams.get('v')
-  url = extractingCodeFromYoutubeUrl
-  const newVideo = {
-    title: title,
-    url: url
-  };
-  Video.create(newVideo, (err, createdVideo) => {
+router.get('/videos/:id/comments/new', (req,res) => {
+  //We have to look for the id if this post and pass it to the template so that the post request will send this comment to the found post
+  Video.findById(req.params.id, (err, foundVideo) => {
     if(err){
       console.log(err)
     }else {
-      User.findOne({username: 'Emmanuel'}, (err, foundUser) => {
+      res.render('comments/createComment.ejs', {video: foundVideo})
+    }
+  })
+ 
+});
+
+//Comments Logic
+
+router.post('/videos/:id/comments', (req, res) => {
+  //Search for the video who's id is in the url
+  Video.findById(req.params.id, (err, foundVideo) => {
+    if(err){
+      console.log(err)
+    }else {
+      //Create the comment
+      //Get the values from the form
+      const author = req.body.author;
+      const text = req.body.text;
+
+      const newComment = {
+        author: author,
+        text: text
+      }
+
+      Comment.create(newComment, (err, createdComment) => {
+        
         if(err){
           console.log(err)
-        }else{
-          //Push this post to the user
-          foundUser.videos.push(createdVideo);
-          //Save the video
-          foundUser.save((err, userWithPost) => {
-            if(err){
-              console.log(err)
-            }else {
-              console.log(userWithPost);
-            }
-          })
+        }else {
+          //Push this comment created also into 
+          console.log(foundVideo)
+          foundVideo.comments.push(createdComment);
+          foundVideo.save();
+          console.log(foundVideo)
+          res.redirect(`/videos/${foundVideo._id}`)
         }
       })
     }
@@ -49,33 +55,5 @@ router.post('/videos', (req, res) => {
 })
 
 
-
-//FETCH VIDEOS
-router.get('/videos', (req, res) => {
-  Video.find({}, (err, videos) => {
-    if(err){
-      console.log(err)
-    }else{
-     res.render('videos', {videos: videos});
-    }
-  })
-});
-
-
-router.get('/videos/all', (req, res) => {
-  Video.find({}, (err, videos) => {
-    if(err){
-      console.log(err)
-    }else{
-      let data = {
-        auth: res.locals.auth, 
-        videos: videos
-      }
-      res.json(data)
-      
-  
-    }
-  })
-})
 
 module.exports = router;

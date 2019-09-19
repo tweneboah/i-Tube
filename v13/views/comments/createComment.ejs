@@ -1,4 +1,4 @@
-<% include partials/header%>
+<% include ../partials/header%>
 
 
 <link rel="stylesheet" href="/css/addVideoForm.css">
@@ -10,7 +10,7 @@
               <div class="card">
                   <div class="card-header">Add Comment</div>
                   <div class="card-body">
-                      <form action="/videos" method="POST">
+                      <form action="/videos/<%=video._id%>/comments" method="POST">
                           <div class="form-group row">
                               <label for="email_address" class="col-md-4 col-form-label text-md-right">Author</label>
                               <div class="col-md-6">
@@ -46,4 +46,4 @@
 </main>
 
 
-<% include partials/footer%>
+<% include ../partials/footer%>

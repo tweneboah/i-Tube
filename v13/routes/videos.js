@@ -9,7 +9,7 @@
 
   //Get the form
   router.get('/videos/add', middleware.isLogin, (req,res) => {
-    res.render('addVideo');
+    res.render('videos/addVideo');
   })
 
 
@@ -28,7 +28,7 @@
       if(err){
         console.log(err)
       }else {
-        User.findOne({username: 'Emmanuel'}, (err, foundUser) => {
+        User.findOne({username: 'Tweneboah'}, (err, foundUser) => {
           if(err){
             console.log(err)
           }else{
@@ -39,7 +39,7 @@
               if(err){
                 console.log(err)
               }else {
-                console.log(userWithPost);
+                res.redirect('/videos')
               }
             })
           }
@@ -50,32 +50,42 @@
 
 
 
-  //FETCH VIDEOS
+  //FETCH ALL VIDEOS
   router.get('/videos', (req, res) => {
     Video.find({}, (err, videos) => {
       if(err){
         console.log(err)
       }else{
-       res.render('videos', {videos: videos});
+       res.render('videos/videos.ejs', {videos: videos});
       }
     })
   });
 
 
-  router.get('/videos/all', (req, res) => {
-    Video.find({}, (err, videos) => {
+  
+  //FETCH A SINGLE VIDEO
+// router.get('/videos/:id', (req, res) => {
+//   Video.findById(req.params.id, (err, foundVideo) => {
+//      if(err){
+//        console.log(err)
+//      }else {
+//        console.log(foundVideo)
+//        res.render('videos/showMore.ejs', {video: foundVideo})
+//      }
+//   })
+// })
+
+
+  //FETCH A SINGLE VIDEO AND POPULATE IT'S COMMENTS
+  router.get('/videos/:id', (req, res) => {
+    Video.findById(req.params.id).populate('comments').exec((err, videoWithComments) => {
       if(err){
-        console.log(err)
-      }else{
-        let data = {
-          auth: res.locals.auth, 
-          videos: videos
-        }
-        res.json(data)
-        
-    
+        console.log(err);
+      }else {
+        res.render('videos/showMore.ejs', {video: videoWithComments})
       }
     })
   })
+  
 
 module.exports = router;

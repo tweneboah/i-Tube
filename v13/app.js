@@ -8,6 +8,7 @@
   const LocalStrategy = require('passport-local');
   const usersRoute = require('./routes/users');
   const videosRoute = require('./routes/videos');
+  const commentsRoute = require('./routes/comment');
   const app = express();
   
 
@@ -54,9 +55,11 @@
   //ROUTES
   app.use('/', videosRoute);
   app.use('/', usersRoute);
+  app.use('/', commentsRoute);
+
   app.get('/', (req, res) => {
     res.render('home')
-    })
+  })
 
 
 
