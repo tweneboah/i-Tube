@@ -1,0 +1,100 @@
+<% include ../partials/header%>
+
+
+<link rel="stylesheet" href="/css/addVideoForm.css">
+
+<% if(!currentUser){ %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+      <a class="navbar-brand" href="/">i-Tube</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/users/register/new">Register<span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/users/login/new">Login<span class="sr-only"></span></a>
+          </li>
+        
+          <li class="nav-item active">
+              <a class="nav-link" href="/videos/add">Add Video <span class="sr-only"></span></a>
+          </li>
+      </div>
+    </nav>
+    <%} else{ %>
+      <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <a class="navbar-brand" href="/">i-Tube</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/logout">Logout<span class="sr-only"></span></a>
+            </li>
+  
+            <li class="nav-item active">
+              <a class="nav-link" href="/users/profile/<%=currentUser.id%>">Profile<span class="sr-only"></span></a>
+            </li>
+  
+            <li class="nav-item active">
+                <a class="nav-link" href="/videos/add">Add Video <span class="sr-only"></span></a>
+              </li>
+        </div>
+      </nav>
+    <%}%>
+
+ <main class="login-form m-5">
+  <div class="cotainer">
+      <div class="row justify-content-center">
+          <div class="col-md-8">
+              <div class="card">
+                  <div class="card-header text-center" style="background-color: rgb(187, 98, 26)"><h4 style="color: rgb(216, 226, 216)">REGISTER</h4></div>
+                  <div class="card-body">
+                      <form action="/users/register" method="POST">
+                          <div class="form-group row">
+                              <label for="email_address" class="col-md-4 col-form-label text-md-right" >Username</label>
+                              <div class="col-md-6">
+                                  <input type="text"  class="form-control" name="username" required autofocus placeholder="Username">
+                              </div>
+                          </div>
+
+                          <div class="form-group row">
+                              <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                              <div class="col-md-6">
+                                  <input type="text" id="password" class="form-control" name="password" required placeholder="Enter Password">
+                              </div>
+                          </div>
+
+            
+
+                          <div class="col-md-6 offset-md-4">
+                              <button type="submit" class="btn btn-primary">
+                                  Register
+                              </button>
+                              <a href="/users/login/new" class="btn btn-link">
+                                Login Here
+                            </a>
+                          </div>
+                  </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+</main>
+
+
+<% include ../partials/footer%>

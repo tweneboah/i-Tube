@@ -1,0 +1,46 @@
+<% include ../partials/header%>
+
+<div class="container">
+  <div class="row">
+    
+      <div class="col">
+        
+
+                <p><h5><%=video.title%></h5></p>
+                <iframe width="1000" height="500"  src="https://www.youtube-nocookie.com/embed/<%=video.url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+
+                <p text-white class="btn btn-warning"> 
+                      <a href="/videos/<%=video.id%>/comments/new">
+                        Add Comment
+                      </a> 
+                  
+                </p>  Total Comment/s : <%=video.comments.length%>
+
+             
+                   
+                        <form action="/videos/<%=video.id%>%>?_method=DELETE" method="POST">
+                         <button  class="btn btn-danger">Delete Video</button>
+                        </form>
+                     
+                
+             
+    </div>
+     
+  </div>
+</div>
+
+
+<% video.comments.forEach((video) => {%>    
+
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+        
+        <h5><%=video.author%></h5>
+        <p><%=video.text%></p>
+    
+     </div>
+</div>
+</div>
+<% })%>
+<% include ../partials/footer%>

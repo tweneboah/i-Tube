@@ -1,0 +1,31 @@
+<% include ../partials/header%>
+
+
+
+
+<div class="container-fluid " style="background: rgb(102, 7, 23)">
+   
+	<div class="row"><br>
+         <div class="col">
+		<div class="jumbotron text-center">
+
+          <h1><em class="text-success"><%=currentUser.username%> </em> Welcome to i-Tube</h1>
+
+          <p>i-tube application helps you to save your favourite youtube videos in a secured place. Your saved videos are visible by you only!. No more funzy adds and bookmarking</p>
+          <p><a href="/users/profile/<%=currentUser.id%>" class="btn btn-primary btn-lg">View your profile</a></p>
+
+          <ul class="list-group">
+                <li class="list-group-item">You can delete videos</li>
+              
+                
+                <li class="list-group-item list-group-item-primary">Authentication</li>
+                <li class="list-group-item list-group-item-secondary">You can comment videos</li>
+                <li class="list-group-item list-group-item-success">You can delet your account</li>
+              </ul>
+            </div>
+        </div>
+	</div>
+	
+</div>
+
+<% include ../partials/footer%>
